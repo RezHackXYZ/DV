@@ -116,7 +116,9 @@ def get_llm_answer(text):
                     "role": "system",
                     "content": """Answer questions based on the provided database of Q&A pairs.
 Take some liberty to interpret the question. 
+ie: traven what is it could be considerd as what is traven. try an duse fuzzy finding
 If the relevant answer is not in the database, 
+then try to awnser it but if u cant 
 respond with the exact phrase 'Not sure'. 
 If you are not 100 percent sure of the questions intent, 
 respond with the exact phrase 'Not sure' and not anything else. 
@@ -188,7 +190,7 @@ def message(payload):
 
             answer = get_llm_answer(text)
 
-            if answer != "##Not sure##" or answer != None:
+            if answer != "Not sure" or answer != "None":
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
