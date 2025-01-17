@@ -16,14 +16,14 @@ DV Bot is a Slack bot that helps answer frequently asked questions using a prede
 
 - make a fork
 - update the qa.json file
-- get a pr
+- get a pr (msg me on slack (@A_TechyBoy) after that)
 - done
 
 ### the code?
 
 - make a fork
 - update the app.py or anny other file
-- get a pr
+- get a pr (msg me on slack (@A_TechyBoy) after that)
 - done
 
 ## Contact
