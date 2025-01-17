@@ -114,7 +114,7 @@ def get_llm_answer(text):
             "messages": [
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant. Answer questions based on the provided database or respond with 'No relevant answer found.'",
+                    "content": "Answer questions based on the provided database of Q&A pairs. Take some liberty to interpret the question. If the relevant answer is not in the database, or you are not 100 percent sure of the question intent, respond exactly with '##Not sure##'",
                 },
                 {
                     "role": "user",
@@ -182,7 +182,7 @@ def message(payload):
 
             answer = get_llm_answer(text)
 
-            if answer != "No relevant answer found." or answer != None:
+            if answer != "##Not sure##" or answer != None:
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
@@ -190,7 +190,7 @@ def message(payload):
                     thread_ts=ts,
                 )
             else:
-                logger.info("No relevant answer found")
+                logger.info(f"No relevant answer found for question: {text}")
 
         except Exception as e:
             logger.error(f"Error processing message event: {e}")
