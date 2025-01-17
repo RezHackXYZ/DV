@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from flask import Flask, cli
 from slackeventsapi import SlackEventAdapter
 
-env_path = Path('.') / '.env'
+env_path = Path('.') / '/etc/secrets/.env'
 load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
