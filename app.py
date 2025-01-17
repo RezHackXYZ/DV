@@ -184,7 +184,11 @@ def message(payload):
 
             if answer:
                 logger.info(f"Sending answer: {answer}")
-                client.chat_postMessage(channel=channel_id, text=f"``` {answer} ```\n This Anwer is from LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.", thread_ts=ts)
+                client.chat_postMessage(
+                    channel=channel_id,
+                    text=f"``` {answer} ```\n This Anwer is from LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.",
+                    thread_ts=ts,
+                )
             else:
                 logger.info("No relevant answer found")
                 client.chat_postMessage(
@@ -219,5 +223,5 @@ if __name__ == "__main__":
     # Send startup message
     send_startup_message()
 
-    # Run Flask app
-    app.run(debug=True)
+    # Run Flask app on all interfaces
+    app.run(debug=True, host="0.0.0.0", port=5000)
