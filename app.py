@@ -168,7 +168,7 @@ def message(payload):
     thread_ts = event.get("thread_ts")
 
     # Check if the message is in the specified channel and not in a thread
-    if (channel_id == "C088ZPE8WTF" or channel_id == "C07PZNMBPBN") and (not thread_ts or thread_ts == ts):
+    if (channel_id == "C088ZPE8WTF") and (not thread_ts or thread_ts == ts):
         try:
             # Ignore bot's own messages
             if user_id == BOT_ID:
