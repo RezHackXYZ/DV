@@ -1,18 +1,18 @@
 [
     {
         "Question": "What does the setup script do?",
-        "Answer": "The script automatically installs the Wakatime extension if you have Visual Studio Code installed and connects it to Hackatime - our custom server for High Seas. It then sends us a heartbeat so we know you’ve successfully set it up. You can look at the full script here for Linux/macOS or here for Windows."
+        "Answer": "The script automatically installs the Wakatime extension if you have Visual Studio Code installed and connects it to Hackatime - our custom server for High Seas. It then sends us a heartbeat so we know you've successfully set it up. You can look at the full script here for Linux/macOS or here for Windows."
     },
     {
         "Question": "What if it errors?",
-        "Answer": "Don’t fret! If something goes wrong, click the “Or, skip for now” button and continue with the tutorial."
+        "Answer": "Don't fret! If something goes wrong, click the “Or, skip for now” button and continue with the tutorial."
     },
     {
         "Question": "Why have I not got an invite to Slack?",
-        "Answer": "If you don’t see an invite in your inbox, make sure to check your spam folder and wait a few minutes. If you still don’t see it after waiting a few minutes, please email highseas@hackclub.com from the email you signed up with, using the subject 'Not received High Seas Slack invite'."
+        "Answer": "If you don't see an invite in your inbox, make sure to check your spam folder and wait a few minutes. If you still don't see it after waiting a few minutes, please email highseas@hackclub.com from the email you signed up with, using the subject 'Not received High Seas Slack invite'."
     },
     {
-        "Question": "Why can’t I do anything?",
+        "Question": "Why can't I do anything?",
         "Answer": "Check your DMs with Slackbot. You should have a message telling you to make your way to the Harbor. From here, you can complete the tutorial to graduate Pirate Academy."
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "Question": "Why do I keep landing at the shop?",
-        "Answer": "You need to get the free stickers from the shop to complete the tutorial. After selecting them you will be redirected to complete student verification and then we’ll actually send you stickers!"
+        "Answer": "You need to get the free stickers from the shop to complete the tutorial. After selecting them you will be redirected to complete student verification and then we'll actually send you stickers!"
     },
     {
         "Question": "What can I use to log time?",
@@ -41,15 +41,15 @@
     },
     {
         "Question": "Do I have to use GitHub?",
-        "Answer": "Nope! You can use any Git host, but we recommend using GitHub as it’s an industry standard."
+        "Answer": "Nope! You can use any Git host, but we recommend using GitHub as it's an industry standard."
     },
     {
         "Question": "Does my project need to be open source?",
-        "Answer": "Yes! Your project needs to be on a Git repository that’s publicly accessible."
+        "Answer": "Yes! Your project needs to be on a Git repository that's publicly accessible."
     },
     {
         "Question": "How do I ship a project?",
-        "Answer": "To ship your project, you need to visit the Shipyard to draft a new ship. Once you’re happy with it, you can ship it to the Wonderdome where it’ll get peer-voted before your doubloons are given out."
+        "Answer": "To ship your project, you need to visit the Shipyard to draft a new ship. Once you're happy with it, you can ship it to the Wonderdome where it'll get peer-voted before your doubloons are given out."
     },
     {
         "Question": "What are the requirements for a shipped project?",
@@ -84,7 +84,7 @@
         "Answer": "No. All orders are final. You cannot cancel or modify the details of them after purchasing them so make sure you choose wisely."
     },
     {
-        "Question": "What if my order can’t be fulfilled?",
+        "Question": "What if my order can't be fulfilled?",
         "Answer": "We will issue you a full refund of your doubloons if we are unable to fulfill your order."
     },
     {
@@ -93,7 +93,7 @@
     },
     {
         "Question": "Will Hack Club cover customs fees?",
-        "Answer": "No. Hack Club cannot cover customs fees for you. Customs duties are fees that your country requires you to pay to receive packages internationally above a certain value. You must pay these duties to get your prize. You should check your country’s Government website to help predict what the costs will be. If you are unable to pay the associated customs fees, do not purchase an item because that prize will get destroyed."
+        "Answer": "No. Hack Club cannot cover customs fees for you. Customs duties are fees that your country requires you to pay to receive packages internationally above a certain value. You must pay these duties to get your prize. You should check your country's Government website to help predict what the costs will be. If you are unable to pay the associated customs fees, do not purchase an item because that prize will get destroyed."
     },
     {
         "Question": "How can I see everything coming to me?",
@@ -105,7 +105,7 @@
     },
     {
         "Question": "Why do I have to verify?",
-        "Answer": "We need to make sure that you’re a high school student. Unfortunately, lots of adults like pretending to be kids to get free stuff, so we need to make sure you’re actually who you say you are."
+        "Answer": "We need to make sure that you're a high school student. Unfortunately, lots of adults like pretending to be kids to get free stuff, so we need to make sure you're actually who you say you are."
     },
     {
         "Question": "What form of ID is accepted?",
@@ -117,10 +117,34 @@
     },
     {
         "Question": "Why is (x feature) not working properly?",
-        "Answer": "The team is aware of issues and is working super hard to fix them! If you don’t think they’re aware of an issue, please send a message in #high-seas-help with the issue."
+        "Answer": "The team is aware of issues and is working super hard to fix them! If you don't think they're aware of an issue, please send a message in #high-seas-help with the issue."
     },
     {
         "Question": "When will the High Seas drain?",
         "Answer": "High Seas will end on January 31st, 2025. More information about how the event will wrap up will be released closer to the time."
+    },
+    {
+        "Question": "when will my item x arive?",
+        "Answer": "The Shipment Viewer will show everything that is on its way to you from our warehouse with tracking links if they are available. Anything ordered on your behalf from a different vendor will not show up here. the u will have to wait"
+    },
+    {
+        "Question": "How to redeme x card/grant?",
+        "Answer": "u will be given a hcb visa grant card"
+    },
+    {
+        "Question": "how to redeem multiple x credits/grants at the same time",
+        "Answer": "while ordering untick the 'don't merge this with my other x credits' option"
+    },
+    {
+        "Question": "what is the traven",
+        "Answer": "a meet up place for all the pirates... check https://hackclub.slack.com/archives/C07TNAZGMHS/p1736524349889869 for more info"
+    },
+    {
+        "Question": "Hi, is there a way to see the projects i have already voted for ?, there was a really cool one and i forgot to save its repo so that i can see it later",
+        "Answer": "check ur browser history or If you remember the name of the project go here #high-seas-ships and search for it"
+    },
+    {
+        "Question": "why are some ships golden?",
+        "Answer": "All of those goden projects will get 10% more doubs Tommorow as they are selected as good/inforamtive for more info check: https://hackclub.slack.com/archives/C07TNAZGMHS/p1737089964212119"
     }
 ]

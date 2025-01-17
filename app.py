@@ -182,7 +182,7 @@ def message(payload):
 
             answer = get_llm_answer(text)
 
-            if answer:
+            if answer != "No relevant answer found.":
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
@@ -191,11 +191,6 @@ def message(payload):
                 )
             else:
                 logger.info("No relevant answer found")
-                client.chat_postMessage(
-                    channel=channel_id,
-                    text="I couldn't find a relevant answer. Please try rephrasing your question.",
-                    thread_ts=ts,
-                )
 
         except Exception as e:
             logger.error(f"Error processing message event: {e}")
