@@ -1,15 +1,126 @@
 [
     {
-        "Question": "I am stuck in the tutorial",
-        "Answer": "Try clearing your cookies, or retrying the tutorial in incognito mode"
+        "Question": "What does the setup script do?",
+        "Answer": "The script automatically installs the Wakatime extension if you have Visual Studio Code installed and connects it to Hackatime - our custom server for High Seas. It then sends us a heartbeat so we know you’ve successfully set it up. You can look at the full script here for Linux/macOS or here for Windows."
     },
     {
-        "Question": "What are curses and blessings?",
-        "Answer": "Curses (-50% doubloons): Given for minimal effort votes or using dots to reach word count.\n\nBlessings (+20% doubloons): Earned through detailed votes with suggestions and insights."
-    }
-    ,
+        "Question": "What if it errors?",
+        "Answer": "Don’t fret! If something goes wrong, click the “Or, skip for now” button and continue with the tutorial."
+    },
     {
-        "Question": "Is High Seas ending?",
-        "Answer": "on 31st jan"
+        "Question": "Why have I not got an invite to Slack?",
+        "Answer": "If you don’t see an invite in your inbox, make sure to check your spam folder and wait a few minutes. If you still don’t see it after waiting a few minutes, please email highseas@hackclub.com from the email you signed up with, using the subject 'Not received High Seas Slack invite'."
+    },
+    {
+        "Question": "Why can’t I do anything?",
+        "Answer": "Check your DMs with Slackbot. You should have a message telling you to make your way to the Harbor. From here, you can complete the tutorial to graduate Pirate Academy."
+    },
+    {
+        "Question": "Why am I getting an error that I am not authorised to install High Seas on Hack Club?",
+        "Answer": "Multi-Channel guests are not able to connect to High Seas through the Slack login. Once your verification is accepted, you will be upgraded to a full Slack user and the Slack login will work. Until your verification is accepted, please use the link that was sent to you in direct messages!"
+    },
+    {
+        "Question": "Why do I keep landing at the shop?",
+        "Answer": "You need to get the free stickers from the shop to complete the tutorial. After selecting them you will be redirected to complete student verification and then we’ll actually send you stickers!"
+    },
+    {
+        "Question": "What can I use to log time?",
+        "Answer": "We use a custom Wakatime server, but we have some limits on the extensions you can use. Anything listed below works for High Seas:\n\n* Any JetBrains IDE plugins\n* Any Eclipse tooling plugins\n* Arduino IDE Plugin\n* Brackets Plugin\n* Delphi Plugin\n* Any VSCode-based editor Plugin\n* Visual Studio Plugin\n* HBuilderX Plugin\n* Ida Plugin\n* Komodo Plugin\n* Neovim Plugin\n* Notepad++ Plugin\n* Siyuan Plugin\n* Sublime Text Plugin\n* TeXStudio Plugin\n* Zed Plugin\n* Emacs Plugin\n* Chromium Browsers Extension\n* Godot Plugin\n* KiCad Plugin\n* Any other editor that saves to file Program\n\nTo set up the extensions, run the command from the Signpost which will configure the plugins to connect to Hakatime, our Wakatime server."
+    },
+    {
+        "Question": "What projects are accepted for High Seas?",
+        "Answer": "Anything that you programmed and logged with the extension! We are not accepting non-programming projects for High Seas (we may in the future, though)."
+    },
+    {
+        "Question": "Does school work or paid work count?",
+        "Answer": "High Seas is about the joy of building for the sake of building. If you're building something for school or to get money from it, we can't count it. This includes freelance work, starting a company and more."
+    },
+    {
+        "Question": "Can I do a group project?",
+        "Answer": "Yeah, totally! Each of you should ship it to the Wonderdome individually."
+    },
+    {
+        "Question": "Do I have to use GitHub?",
+        "Answer": "Nope! You can use any Git host, but we recommend using GitHub as it’s an industry standard."
+    },
+    {
+        "Question": "Does my project need to be open source?",
+        "Answer": "Yes! Your project needs to be on a Git repository that’s publicly accessible."
+    },
+    {
+        "Question": "How do I ship a project?",
+        "Answer": "To ship your project, you need to visit the Shipyard to draft a new ship. Once you’re happy with it, you can ship it to the Wonderdome where it’ll get peer-voted before your doubloons are given out."
+    },
+    {
+        "Question": "What are the requirements for a shipped project?",
+        "Answer": "A shipped project must be shared in a way that other people can experience to the greatest possible extent.\n\nYour repo needs a README with:\n* Screenshots and/or videos of your project in action\n* Description of your project\n* A live URL, release or deployment for the project\n* Steps on how to use your project\n\nIf all else fails, you can publish it to GitHub including everything necessary to run the project (requirements.txt, package.json)."
+    },
+    {
+        "Question": "What should a demo link be?",
+        "Answer": "A demo link should be something that people can visit and experience your project. Here are some examples:\n* A Python package published to PyPi\n* A Minecraft mod published to Modrinth or Hangar\n* Publishing a website on your domain\n* A game published on Itch\n\nIf there's no way for other people to experience it themselves, you can upload a video to YouTube and link that."
+    },
+    {
+        "Question": "How do I get doubloons?",
+        "Answer": "You get doubloons after your project is sent to the Wonderdome and receives enough votes. You can see the number of votes your projects have in the Shipyard."
+    },
+    {
+        "Question": "What determines how many doubloons I get?",
+        "Answer": "The amount of doubloons you get paid from the Wonderdome depends on how many hours you put into your project and how it ranks against projects with similar numbers of hours."
+    },
+    {
+        "Question": "Why do I need to vote on projects?",
+        "Answer": "We use the votes to figure out the quality of projects for doubloon payouts. It also gets people using your projects!"
+    },
+    {
+        "Question": "What happens to my vote reasons?",
+        "Answer": "We don't share your feedback on the projects with the authors. It's just used for making sure your votes are legitimate and to improve the system."
+    },
+    {
+        "Question": "Does (x) ship to (y)?",
+        "Answer": "Check the shop! You can select your region and everything in the shop will ship to you!"
+    },
+    {
+        "Question": "Can I change my order later?",
+        "Answer": "No. All orders are final. You cannot cancel or modify the details of them after purchasing them so make sure you choose wisely."
+    },
+    {
+        "Question": "What if my order can’t be fulfilled?",
+        "Answer": "We will issue you a full refund of your doubloons if we are unable to fulfill your order."
+    },
+    {
+        "Question": "Do I have to pay?",
+        "Answer": "No. The prizes and shipping are entirely paid for by Hack Club. Your country may charge you a customs duty on certain items, however."
+    },
+    {
+        "Question": "Will Hack Club cover customs fees?",
+        "Answer": "No. Hack Club cannot cover customs fees for you. Customs duties are fees that your country requires you to pay to receive packages internationally above a certain value. You must pay these duties to get your prize. You should check your country’s Government website to help predict what the costs will be. If you are unable to pay the associated customs fees, do not purchase an item because that prize will get destroyed."
+    },
+    {
+        "Question": "How can I see everything coming to me?",
+        "Answer": "The Shipment Viewer will show everything that is on its way to you from our warehouse with tracking links if they are available. Anything ordered on your behalf from a different vendor will not show up here."
+    },
+    {
+        "Question": "Who can participate in High Seas?",
+        "Answer": "Anyone 18 or under can participate in High Seas! If you are still in high school, over 18 and in the United States or Canada, you can also participate in High Seas."
+    },
+    {
+        "Question": "Why do I have to verify?",
+        "Answer": "We need to make sure that you’re a high school student. Unfortunately, lots of adults like pretending to be kids to get free stuff, so we need to make sure you’re actually who you say you are."
+    },
+    {
+        "Question": "What form of ID is accepted?",
+        "Answer": "United States / Australia / Canada / Singapore: Government issued ID (drivers license, NRIC card, FIN card, passport) or a school ID and your most recent report card / transcript. India: Valid Aadhar number. United Kingdom: Government issued ID (e.g., drivers license or passport) or a dated school ID (no report card/transcript needed). Other: A government issued document with your date of birth, name, and photo."
+    },
+    {
+        "Question": "What if my verification was rejected?",
+        "Answer": "You can reapply here! You can find your Slack ID by running /sdt whoami in Slack. If you are struggling, please ask in #high-seas-help and someone will help you."
+    },
+    {
+        "Question": "Why is (x feature) not working properly?",
+        "Answer": "The team is aware of issues and is working super hard to fix them! If you don’t think they’re aware of an issue, please send a message in #high-seas-help with the issue."
+    },
+    {
+        "Question": "When will the High Seas drain?",
+        "Answer": "High Seas will end on January 31st, 2025. More information about how the event will wrap up will be released closer to the time."
     }
 ]
