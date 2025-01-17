@@ -168,7 +168,7 @@ def message(payload):
     thread_ts = event.get("thread_ts")
 
     # Check if the message is in the specified channel and not in a thread
-    if channel_id == "C088ZPE8WTF" and (not thread_ts or thread_ts == ts):
+    if (channel_id == "C088ZPE8WTF" or channel_id == "C07PZNMBPBN") and (not thread_ts or thread_ts == ts):
         try:
             # Ignore bot's own messages
             if user_id == BOT_ID:
@@ -186,7 +186,7 @@ def message(payload):
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
-                    text=f"``` {answer} ```\n This Anwer is from LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.",
+                    text=f"``` {answer} ```\n This Anwer is from LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check https://github.com/A-TechyBoy/DV",
                     thread_ts=ts,
                 )
             else:
