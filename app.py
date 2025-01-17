@@ -114,7 +114,13 @@ def get_llm_answer(text):
             "messages": [
                 {
                     "role": "system",
-                    "content": "Answer questions based on the provided database of Q&A pairs. Take some liberty to interpret the question. If the relevant answer is not in the database, or you are not 100 percent sure of the question intent, respond exactly with '##Not sure##'",
+                    "content": """Answer questions based on the provided database of Q&A pairs.
+Take some liberty to interpret the question. 
+If the relevant answer is not in the database, 
+respond with the exact phrase 'Not sure'. 
+If you are not 100 percent sure of the questions intent, 
+respond with the exact phrase 'Not sure' and not anything else. 
+Do not give any other answer.""",
                 },
                 {
                     "role": "user",
