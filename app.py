@@ -96,42 +96,28 @@ def get_llm_answer(text):
 
     direct_answer = qa_database.find_answer(text)
     if direct_answer:
-        logger.info(f"Found direct answer for: {text}")
         return direct_answer
 
     try:
         logger.info(f"Processing question via gpt4free: {text}")
-
-        system_prompt = """Answer questions based on the provided database of Q&A pairs.
-Take some liberty to interpret the question. 
-ie: traven what is it could be considerd as what is traven. try an duse fuzzy finding
-If the relevant answer is not in the database, 
-then try to awnser it but if u cant 
-respond with the exact phrase 'Not sure'. 
-If you are not 100 percent sure of the questions intent, 
-respond with the exact phrase 'Not sure' and not anything else. 
-Do not give any other answer."""
-
+        
         messages = [
-            {"role": "system", "content": system_prompt},
+            {"role": "system", "content": "Answer questions based on the provided database of Q&A pairs. Take liberty to interpret the question. If unsure, respond with 'Not sure'."},
             {"role": "user", "content": f"Database: {json.dumps(qa_database.qa_data)}\n\nUser Question: {text}"}
         ]
 
         response = g4f.ChatCompletion.create(
-            model="gpt-4",
-            provider=g4f.Provider.You,
+            model="gpt-3.5-turbo",
+            provider=g4f.Provider.DeepAi,
             messages=messages,
             stream=False
         )
 
-        logger.info(f"GPT4Free response: {response}")
         return response.strip()
 
     except Exception as e:
         logger.error(f"Error in get_llm_answer: {e}")
         return None
-
-# [Rest of the code remains the same]
 
 @event_adapter.on("message")
 def message(payload):
