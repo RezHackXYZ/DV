@@ -146,7 +146,7 @@ def message(payload):
     ts = event.get("ts")
     thread_ts = event.get("thread_ts")
 
-    if (channel_id == "C088ZPE8WTF" or channel_id == "C07PZNMBPBN") and (not thread_ts or thread_ts == ts):
+    if (channel_id == "C088ZPE8WTF") and (not thread_ts or thread_ts == ts):
         try:
             if user_id == BOT_ID:
                 return
