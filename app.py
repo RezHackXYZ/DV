@@ -87,18 +87,18 @@ class QADatabase:
 # Initialize Q&A database
 qa_database = QADatabase()
 
+# [Previous imports and setup code remain the same until get_llm_answer function]
+
 def get_llm_answer(text):
     if not text:
         logger.warning("Empty question received")
         return None
 
-    # First try direct Q&A database
     direct_answer = qa_database.find_answer(text)
     if direct_answer:
         logger.info(f"Found direct answer for: {text}")
         return direct_answer
 
-    # If no direct answer, try gpt4free
     try:
         logger.info(f"Processing question via gpt4free: {text}")
 
@@ -118,7 +118,7 @@ Do not give any other answer."""
         ]
 
         response = g4f.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             provider=g4f.Provider.You,
             messages=messages,
             stream=False
@@ -130,6 +130,8 @@ Do not give any other answer."""
     except Exception as e:
         logger.error(f"Error in get_llm_answer: {e}")
         return None
+
+# [Rest of the code remains the same]
 
 @event_adapter.on("message")
 def message(payload):
