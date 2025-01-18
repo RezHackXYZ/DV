@@ -106,12 +106,7 @@ def get_llm_answer(text):
     try:
         logger.info(f"Processing question via gpt4free: {text}")
 
-        system_prompt = """Answer questions based on the provided database of Q&A pairs.
-If a question is unclear or the intent isn't totaly certain, respond with: 'Not sure'.
-If no relevant answer exists in the database, respond with: 'Not sure'.
-Do not provide any other response or explanation in these cases.
-Use fuzzy matching to interpret similar or slightly altered questions.
-If confident and relevant information exists in the database, provide the appropriate answer."""
+        system_prompt = 'Answer questions based on the provided database of Q&A pairs. If a question is unclear or its intent is uncertain, respond with: "Not sure." If no relevant answer exists in the database, respond with: "Not sure." Guidelines: Do not provide any additional response or explanation in these cases. Use fuzzy matching to interpret similar or slightly altered questions. If the asked question is not in the database, respond only with "Not sure."'
 
         messages = [
             {"role": "system", "content": system_prompt},
@@ -163,11 +158,16 @@ def message(payload):
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
-                    text=f"``` {answer} ```\n This Answer is from an LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check https://github.com/A-TechyBoy/DV",
+                    text=f"```{answer}```\n This Answer is from an LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check github.com/A-TechyBoy/DV",
                     thread_ts=ts,
                 )
             else:
                 logger.info(f"No relevant answer found for question: {text}")
+                client.chat_postMessage(
+                    channel=channel_id,
+                    text=f"```No Relevent awnser found...``` as the database is limited to https://github.com/A-TechyBoy/DV/blob/main/qa.json mabby try asking from that?",
+                    thread_ts=ts,
+                )
 
         except Exception as e:
             logger.error(f"Error processing message event: {e}")
