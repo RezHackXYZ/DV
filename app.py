@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from flask import Flask
 from slackeventsapi import SlackEventAdapter
 import logging
-from g4f.Provider import You
 import g4f
 
 # Configure logging
@@ -34,7 +33,9 @@ required_env_vars = {
 missing_vars = [k for k, v in required_env_vars.items() if not v]
 if missing_vars:
     logger.error(f"Missing environment variables: {', '.join(missing_vars)}")
-    raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
+    raise ValueError(
+        f"Missing required environment variables: {', '.join(missing_vars)}"
+    )
 
 # Initialize Slack event adapter
 try:
@@ -53,6 +54,7 @@ try:
 except Exception as e:
     logger.error(f"Failed to initialize Slack client: {e}")
     raise
+
 
 class QADatabase:
     def __init__(self, filename="qa.json"):
@@ -84,40 +86,59 @@ class QADatabase:
                 return qa.get("answer")
         return None
 
+
 # Initialize Q&A database
 qa_database = QADatabase()
 
-# [Previous imports and setup code remain the same until get_llm_answer function]
 
 def get_llm_answer(text):
     if not text:
         logger.warning("Empty question received")
         return None
 
+    # First try direct Q&A database
     direct_answer = qa_database.find_answer(text)
     if direct_answer:
+        logger.info(f"Found direct answer for: {text}")
         return direct_answer
 
+    # If no direct answer, try gpt4free
     try:
         logger.info(f"Processing question via gpt4free: {text}")
-        
+
+        system_prompt = """Answer questions based on the provided database of Q&A pairs.
+Take some liberty to interpret the question. 
+ie: traven what is it could be considerd as what is traven. try an duse fuzzy finding
+If the relevant answer is not in the database, 
+then try to awnser it but if u cant 
+respond with the exact phrase 'Not sure'. 
+If you are not 100 percent sure of the questions intent, 
+respond with the exact phrase 'Not sure' and not anything else. 
+Do not give any other answer."""
+
         messages = [
-            {"role": "system", "content": "Answer questions based on the provided database of Q&A pairs. Take liberty to interpret the question. If unsure, respond with 'Not sure'."},
-            {"role": "user", "content": f"Database: {json.dumps(qa_database.qa_data)}\n\nUser Question: {text}"}
+            {"role": "system", "content": system_prompt},
+            {
+                "role": "user",
+                "content": f"Database: {json.dumps(qa_database.qa_data)}\n\nUser Question: {text}",
+            },
         ]
 
-        response = g4f.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            provider=g4f.Provider.DeepAi,
-            messages=messages,
-            stream=False
-        )
+        response = g4f.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
 
-        return response.strip()
+        # Handle response based on type
+        if isinstance(response, str):
+            answer = response
+        else:
+            answer = response.choices[0].message["content"]
+
+        logger.info(f"GPT4Free response: {answer}")
+        return answer.strip()
 
     except Exception as e:
         logger.error(f"Error in get_llm_answer: {e}")
         return None
+
 
 @event_adapter.on("message")
 def message(payload):
@@ -145,7 +166,7 @@ def message(payload):
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
-                    text=f"``` {answer} ```\n This Answer is from GPT4Free, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check https://github.com/A-TechyBoy/DV",
+                    text=f"``` {answer} ```\n This Answer is from an LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check https://github.com/A-TechyBoy/DV",
                     thread_ts=ts,
                 )
             else:
@@ -162,11 +183,13 @@ def message(payload):
             except:
                 logger.error("Failed to send error message to Slack")
 
+
 def send_startup_message():
     try:
         logger.info("Sent startup message successfully")
     except Exception as e:
         logger.error(f"Failed to send startup message: {e}")
+
 
 if __name__ == "__main__":
     logger.info("Starting the bot...")
