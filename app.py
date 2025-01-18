@@ -107,14 +107,11 @@ def get_llm_answer(text):
         logger.info(f"Processing question via gpt4free: {text}")
 
         system_prompt = """Answer questions based on the provided database of Q&A pairs.
-Take some liberty to interpret the question. 
-ie: traven what is it could be considerd as what is traven. try an duse fuzzy finding
-If the relevant answer is not in the database, 
-then try to awnser it but if u cant 
-respond with the exact phrase 'Not sure'. 
-If you are not 100 percent sure of the questions intent, 
-respond with the exact phrase 'Not sure' and not anything else. 
-Do not give any other answer."""
+If a question is unclear or the intent isn't totaly certain, respond with: 'Not sure'.
+If no relevant answer exists in the database, respond with: 'Not sure'.
+Do not provide any other response or explanation in these cases.
+Use fuzzy matching to interpret similar or slightly altered questions.
+If confident and relevant information exists in the database, provide the appropriate answer."""
 
         messages = [
             {"role": "system", "content": system_prompt},
@@ -149,7 +146,7 @@ def message(payload):
     ts = event.get("ts")
     thread_ts = event.get("thread_ts")
 
-    if (channel_id == "C088ZPE8WTF") and (not thread_ts or thread_ts == ts):
+    if (channel_id == "C088ZPE8WTF" or channel_id = "C07PZNMBPBN") and (not thread_ts or thread_ts == ts):
         try:
             if user_id == BOT_ID:
                 return
