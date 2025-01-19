@@ -154,7 +154,7 @@ def message(payload):
 
             answer = get_llm_answer(text)
 
-            if answer and answer != "Not sure":
+            if answer and answer != "Not sure.":
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
