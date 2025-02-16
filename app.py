@@ -2,12 +2,12 @@ from datetime import datetime
 import slack
 import os
 import json
+import requests
 from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask
 from slackeventsapi import SlackEventAdapter
 import logging
-import g4f
 
 # Configure logging
 logging.basicConfig(
@@ -55,7 +55,7 @@ except Exception as e:
     logger.error(f"Failed to initialize Slack client: {e}")
     raise
 
-# Set to store already processed message IDs
+# Track processed messages using message IDs
 processed_messages = set()
 
 class QADatabase:
@@ -88,10 +88,8 @@ class QADatabase:
                 return qa.get("answer")
         return None
 
-
 # Initialize Q&A database
 qa_database = QADatabase()
-
 
 def get_llm_answer(text):
     if not text:
@@ -104,35 +102,33 @@ def get_llm_answer(text):
         logger.info(f"Found direct answer for: {text}")
         return direct_answer
 
-    # If no direct answer, try gpt4free
+    # If no direct answer, use Hack Club AI API
     try:
-        logger.info(f"Processing question via gpt4free: {text}")
-
-        system_prompt = 'You are a helpful assistant that answers questions based on a provided Q&A database. If you cannot find a relevant answer, respond with just "Not sure." Keep answers concise and on-point.'
+        logger.info(f"Processing question via Hack Club AI API: {text}")
 
         messages = [
-            {"role": "system", "content": system_prompt},
-            {
-                "role": "user",
-                "content": f"Database: {json.dumps(qa_database.qa_data)}\n\nUser Question: {text}",
-            },
+            {"role": "system", "content": "You are a helpful assistant that answers questions based on a provided Q&A database. If you cannot find a relevant answer, respond with just \"Not sure.\" Keep answers concise and on-point."},
+            {"role": "user", "content": f"Database: {json.dumps(qa_database.qa_data)}\n\nUser Question: {text}"}
         ]
 
-        response = g4f.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+        response = requests.post(
+            "https://ai.hackclub.com/chat/completions",
+            headers={"Content-Type": "application/json"},
+            json={"messages": messages}
+        )
 
-        # Handle response based on type
-        if isinstance(response, str):
-            answer = response
+        if response.status_code == 200:
+            response_data = response.json()
+            answer = response_data.get('choices', [{}])[0].get('message', {}).get('content', '')
+            logger.info(f"Hack Club AI API response: {answer}")
+            return answer.strip()
         else:
-            answer = response.choices[0].message["content"]
-
-        logger.info(f"GPT4Free response: {answer}")
-        return answer.strip()
+            logger.error(f"Error from Hack Club AI API: {response.status_code} - {response.text}")
+            return None
 
     except Exception as e:
         logger.error(f"Error in get_llm_answer: {e}")
         return None
-
 
 @event_adapter.on("message")
 def message(payload):
@@ -143,8 +139,10 @@ def message(payload):
     ts = event.get("ts")
     thread_ts = event.get("thread_ts")
     
-    # Check if we've already processed this message
+    # Create a unique identifier for this message
     message_id = f"{channel_id}:{ts}"
+    
+    # Skip if we've already processed this message
     if message_id in processed_messages:
         logger.info(f"Skipping already processed message {message_id}")
         return
@@ -191,13 +189,11 @@ def message(payload):
             except:
                 logger.error("Failed to send error message to Slack")
 
-
 def send_startup_message():
     try:
         logger.info("Sent startup message successfully")
     except Exception as e:
         logger.error(f"Failed to send startup message: {e}")
-
 
 if __name__ == "__main__":
     logger.info("Starting the bot...")
