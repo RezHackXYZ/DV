@@ -55,6 +55,8 @@ except Exception as e:
     logger.error(f"Failed to initialize Slack client: {e}")
     raise
 
+# Set to store already processed message IDs
+processed_messages = set()
 
 class QADatabase:
     def __init__(self, filename="qa.json"):
@@ -106,7 +108,7 @@ def get_llm_answer(text):
     try:
         logger.info(f"Processing question via gpt4free: {text}")
 
-        system_prompt = 'Answer questions based on the provided database of Q&A pairs. If a question is unclear or its intent is uncertain, respond with: "Not sure." If no relevant answer exists in the database, respond with: "Not sure." Guidelines: Do not provide any additional response or explanation in these cases. Use fuzzy matching to interpret similar or slightly altered questions. If the asked question is not in the database, respond only with "Not sure."'
+        system_prompt = 'You are a helpful assistant that answers questions based on a provided Q&A database. If you cannot find a relevant answer, respond with just "Not sure." Keep answers concise and on-point.'
 
         messages = [
             {"role": "system", "content": system_prompt},
@@ -140,6 +142,15 @@ def message(payload):
     text = event.get("text")
     ts = event.get("ts")
     thread_ts = event.get("thread_ts")
+    
+    # Check if we've already processed this message
+    message_id = f"{channel_id}:{ts}"
+    if message_id in processed_messages:
+        logger.info(f"Skipping already processed message {message_id}")
+        return
+    
+    # Add to processed messages
+    processed_messages.add(message_id)
 
     if (channel_id == "C088ZPE8WTF") and (not thread_ts or thread_ts == ts):
         try:
@@ -158,14 +169,14 @@ def message(payload):
                 logger.info(f"Sending answer: {answer}")
                 client.chat_postMessage(
                     channel=channel_id,
-                    text=f"```{answer}```\n This Answer is from an LLM, it may be incorrect or misleading or wrong. contact @A_TechyBoy for more info or to give any suggestions.\n\n for more info check github.com/A-TechyBoy/DV",
+                    text=f"{answer}\n\n_Note: Answer provided by AI - may need verification. Issues/suggestions: contact @A_TechyBoy_",
                     thread_ts=ts,
                 )
             else:
                 logger.info(f"No relevant answer found for question: {text}")
                 client.chat_postMessage(
                     channel=channel_id,
-                    text=f"```No Relevent awnser found...``` as the database is limited to https://github.com/A-TechyBoy/DV/blob/main/qa.json mabby try asking from that?",
+                    text="No relevant answer found. Try checking our Q&A database: github.com/A-TechyBoy/DV/blob/main/qa.json",
                     thread_ts=ts,
                 )
 
